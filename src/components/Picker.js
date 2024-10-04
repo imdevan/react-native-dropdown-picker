@@ -162,7 +162,7 @@ function Picker({
     testID,
     closeOnBackPressed = false,
     extendableBadgeContainer = false,
-    onSelectItem = (item) => {}
+    onSelectItem = (item) => {},
     customItemValueDelimiter = '-',
 }) {
     const [necessaryItems, setNecessaryItems] = useState([]);
