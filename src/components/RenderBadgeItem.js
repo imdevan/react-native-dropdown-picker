@@ -18,6 +18,7 @@ function RenderBadge({
   showBadgeDot,
   onPress,
   THEME,
+  index,
 }) {
   /**
    * onPress.
@@ -33,10 +34,10 @@ function RenderBadge({
       RTL_DIRECTION(rtl, THEME.badgeStyle),
       ...[badgeStyle].flat(),
       {
-        backgroundColor: getBadgeColor(value),
+        backgroundColor: getBadgeColor(value, index),
       },
     ],
-    [THEME, rtl, badgeStyle, getBadgeColor],
+    [THEME, rtl, badgeStyle, getBadgeColor, index],
   );
 
   /**
@@ -48,10 +49,10 @@ function RenderBadge({
       RTL_STYLE(rtl, THEME.badgeDotStyle),
       ...[badgeDotStyle].flat(),
       {
-        backgroundColor: getBadgeDotColor(value),
+        backgroundColor: getBadgeDotColor(value, index),
       },
     ],
-    [THEME, rtl, badgeDotStyle, getBadgeDotColor],
+    [THEME, rtl, badgeDotStyle, getBadgeDotColor, index],
   );
 
   /**
@@ -77,6 +78,7 @@ const areEqual = (nextProps, prevProps) => {
   if (nextProps.showBadgeDot !== prevProps.showBadgeDot) return false;
   if (nextProps.rtl !== prevProps.rtl) return false;
   if (nextProps.theme !== prevProps.theme) return false;
+  if (nextProps.index !== prevProps.index) return false;
 
   return true;
 };

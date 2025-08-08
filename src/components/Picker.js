@@ -1037,14 +1037,12 @@ function Picker({
   /**
    * Get badge color.
    * @param {string} str
+   * @param {number} index
    * @returns {string}
    */
   const getBadgeColor = useCallback(
-    (str) => {
-      str = `${str}`;
-
-      const index = Math.abs(ASCII_CODE(str)) % _badgeColors.length;
-      return _badgeColors[index];
+    (str, index) => {
+      return _badgeColors[index % _badgeColors.length];
     },
     [_badgeColors],
   );
@@ -1052,14 +1050,12 @@ function Picker({
   /**
    * Get badge dot color.
    * @param {string} str
+   * @param {number} index
    * @returns {string}
    */
   const getBadgeDotColor = useCallback(
-    (str) => {
-      str = `${str}`;
-
-      const index = Math.abs(ASCII_CODE(str)) % _badgeDotColors.length;
-      return _badgeDotColors[index];
+    (str, index) => {
+      return _badgeDotColors[index % _badgeDotColors.length];
     },
     [_badgeDotColors],
   );
@@ -1078,7 +1074,7 @@ function Picker({
    * @returns {JSX.Element}
    */
   const __renderBadge = useCallback(
-    ({ item }) => (
+    ({ item, index }) => (
       <RenderBadgeComponent
         props={badgeProps}
         rtl={rtl}
@@ -1095,6 +1091,7 @@ function Picker({
         onPress={onPressBadge}
         theme={theme}
         THEME={THEME}
+        index={index}
       />
     ),
     [
@@ -1218,7 +1215,7 @@ function Picker({
           <View style={extendableBadgeContainerStyle}>
             {selectedItems.map((item, index) => (
               <View key={index} style={extendableBadgeItemContainerStyle}>
-                <__renderBadge item={item} />
+                <__renderBadge item={item} index={index} />
               </View>
             ))}
           </View>

@@ -92,9 +92,10 @@ declare module 'react-native-dropdown-picker' {
     badgeDotStyle: StyleProp<ViewStyle>;
     badgeStyle: StyleProp<ViewStyle>;
     badgeTextStyle: StyleProp<TextStyle>;
-    getBadgeColor: (value: string) => string;
-    getBadgeDotColor: (value: string) => string;
+    getBadgeColor: (value: string, index: number) => string;
+    getBadgeDotColor: (value: string, index: number) => string;
     IconComponent: () => JSX.Element;
+    index: number;
     label: string;
     onPress: (value: T) => void;
     props: TouchableOpacityProps;
