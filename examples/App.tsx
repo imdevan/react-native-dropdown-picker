@@ -5,6 +5,7 @@ import JavascriptClassExample from './example-src-files/javascript-class-example
 import JavascriptFunctionExample from './example-src-files/javascript-function-example';
 import TypescriptClassExample from './example-src-files/typescript-class-example';
 import TypescriptFunctionExample from './example-src-files/typescript-function-example';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 enum ExampleComponent {
   JavaScriptClassSingleValue,
@@ -130,31 +131,33 @@ export default class App extends React.Component<Props, State> {
     const { currentExample, examplePickerOpen, exampleComponents } = this.state;
 
     return (
-      <View style={styles.container}>
-        <View style={{ flex: 1 }}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <View style={styles.container}>
           <View style={{ flex: 1 }}>
-            <Text>Choose example:</Text>
+            <View style={{ flex: 1 }}>
+              <Text>Choose example:</Text>
+            </View>
+
+            <View style={{ flex: 1 }}>
+              <DropDownPicker
+                setValue={this.setCurrentExample}
+                value={currentExample}
+                items={exampleComponents}
+                open={examplePickerOpen}
+                setOpen={this.setOpen}
+              />
+            </View>
           </View>
 
-          <View style={{ flex: 1 }}>
-            <DropDownPicker
-              setValue={this.setCurrentExample}
-              value={currentExample}
-              items={exampleComponents}
-              open={examplePickerOpen}
-              setOpen={this.setOpen}
-            />
+          <View style={{ flex: 3 }}>
+            <View style={{ flex: 1 }}>
+              <Text>Example:</Text>
+            </View>
+
+            {App.getExample(currentExample)}
           </View>
         </View>
-
-        <View style={{ flex: 3 }}>
-          <View style={{ flex: 1 }}>
-            <Text>Example:</Text>
-          </View>
-
-          {App.getExample(currentExample)}
-        </View>
-      </View>
+      </GestureHandlerRootView>
     );
   }
 }
