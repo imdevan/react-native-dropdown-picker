@@ -1,10 +1,5 @@
-import React, { JSX, useState } from 'react';
-import { StyleSheet, Text, View, useColorScheme } from 'react-native';
-import DropDownPicker, { ItemType } from 'react-native-dropdown-picker';
-import JavascriptClassExample from './example-src-files/javascript-class-example';
-import JavascriptFunctionExample from './example-src-files/javascript-function-example';
-import TypescriptClassExample from './example-src-files/typescript-class-example';
-import TypescriptFunctionExample from './example-src-files/typescript-function-example';
+import React, { JSX } from 'react';
+import { StyleSheet, View, useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DropDownPickerExample from './example-src-files/example';
 
