@@ -6,8 +6,27 @@ type ExampleProps = {
   multiple?: boolean;
   title: string;
   description?: string;
+  placeholder?: string;
+  multipleText?: string;
+  // For the sake of keeping the examples simple for now
+  items?: ItemType<string>[];
   dropdownProps?: Partial<DropDownPickerProps<string>>;
 };
+
+const DEFAULT_ITEMS = [
+  { label: 'Apple', value: 'apple' },
+  { label: 'Banana', value: 'banana' },
+  { label: 'Nectarines', value: 'nectarines' },
+  { label: 'Kiwis', value: 'kiwis' },
+  { label: 'Raspberries', value: 'raspberries' },
+  { label: 'Pears', value: 'pears' },
+  { label: 'Guava', value: 'guava' },
+  { label: 'Grapes', value: 'grapes' },
+  { label: 'Manderins', value: 'manderins' },
+  { label: 'Pineapple', value: 'pineapple' },
+  { label: 'Dragon Fruit', value: 'dragon_fruit' },
+  { label: 'Prickly Pear', value: 'prickly_pear' },
+];
 
 const styles = StyleSheet.create({
   title: {
@@ -21,7 +40,11 @@ const styles = StyleSheet.create({
   exampleContainer: {
     display: 'flex',
     flexDirection: 'column',
-    gap: 16
+    position: 'relative',
+    gap: 16,
+  },
+  dropdownContainer: {
+    zIndex: 1
   }
 });
 
@@ -35,6 +58,9 @@ export default function DropDownPickerExample({
     title,
     description,
     dropdownProps,
+    placeholder = 'Choose a fruit',
+    multipleText='You have chosen {count} fruits.',
+    items = DEFAULT_ITEMS,
 }: ExampleProps): JSX.Element {
   const [open, setOpen] = useState<boolean>(false);
   const [singleValue, setSingleValue] = useState<string | null>(null);
@@ -43,17 +69,13 @@ export default function DropDownPickerExample({
   const color = colorScheme === 'dark' ? '#fff' : '#222';
   const theme =  colorScheme === 'dark' ? 'DARK' : 'LIGHT';
   
-  const [items, setItems] = useState<Array<ItemType<string>>>([
-    { label: 'Apple', value: 'apple' },
-    { label: 'Banana', value: 'banana' },
-    { label: 'Nectarines', value: 'nectarines' },
-    { label: 'Kiwis', value: 'kiwis' },
-    { label: 'Raspberries', value: 'raspberries' },
-    { label: 'Pears', value: 'pears' },
-  ]);
-
+  const [_items, setItems] = useState<Array<ItemType<string>>>(items);
+  
   return (
-    <View style={styles.exampleContainer}>
+    <View style={{
+      ...styles.exampleContainer,
+      zIndex: open ? 10 : 1
+      }}>
       <View>
         <Text style={{...styles.title, color}}>{title}</Text>
         {description && (
@@ -61,37 +83,34 @@ export default function DropDownPickerExample({
         )}
       </View>
 
-      <View>
-        {multiple ? (
-          <DropDownPicker
-            open={open}
-            value={multiValue}
-            items={items}
-            setOpen={setOpen}
-            setValue={setMultiValue}
-            setItems={setItems}
-            theme={theme}
-            placeholder='Choose a fruit'
-            multiple
-            multipleText='You have chosen {count} fruits.'
-            {...dropdownProps}
-          />
-        ) : (
-          <DropDownPicker
-            open={open}
-            value={singleValue}
-            items={items}
-            setOpen={setOpen}
-            setValue={setSingleValue}
-            setItems={setItems}
-            theme={theme}
-            placeholder='Choose a fruit'
-            multiple={false}
-            {...dropdownProps}
-          />
-        )}
-      </View>
-
+      {multiple ? (
+        <DropDownPicker
+          open={open}
+          value={multiValue}
+          items={_items}
+          setOpen={setOpen}
+          setValue={setMultiValue}
+          setItems={setItems}
+          theme={theme}
+          placeholder={placeholder}
+          multipleText={multipleText}
+          multiple
+          {...dropdownProps}
+        />
+      ) : (
+        <DropDownPicker
+          open={open}
+          value={singleValue}
+          items={_items}
+          setOpen={setOpen}
+          setValue={setSingleValue}
+          setItems={setItems}
+          theme={theme}
+          placeholder={placeholder}
+          multiple={false}
+          {...dropdownProps}
+        />
+      )}
     <View>
         <Text style={{...styles.description, color}}>
         {multiple ? 'Fruits currently are: ' : 'Fruit currently is: '}
