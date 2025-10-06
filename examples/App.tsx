@@ -77,6 +77,20 @@ export default function App(): JSX.Element {
               description="This is the default dropdown picker - with search"
               dropdownProps={{searchable: true}}
               />
+            
+            <DropDownPickerExample 
+              title="Multiple Search Example"
+              description="This is the default dropdown picker - with search"
+              multiple
+              dropdownProps={{searchable: true}}
+              />
+
+            <DropDownPickerExample 
+              title="Multiple Search Clear on Select Example"
+              description="This is the default dropdown picker - with search"
+              multiple
+              dropdownProps={{searchable: true, clearSearchFieldOnSelect: true, mode: "BADGE"}}
+              />
           </View>
         </View>
       </View>
