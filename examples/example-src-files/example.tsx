@@ -77,10 +77,7 @@ export default function DropDownPickerExample({
   const [_items, setItems] = useState<Array<ItemType<string>>>(items);
   
   return (
-    <View style={{
-      ...styles.exampleContainer,
-      zIndex: open ? 10 : 1
-      }}>
+    <View style={{ ...styles.exampleContainer, zIndex: open ? 10 : 1 }}>
       <View>
         <Text style={{...styles.title, color}}>{title}</Text>
         {description && (
@@ -116,22 +113,23 @@ export default function DropDownPickerExample({
           {...dropdownProps}
         />
       )}
-    <View style={{...styles.body}}>
-        <Text style={{...styles.description, color}}>
-        {multiple ? 'Fruits currently are: ' : 'Fruit currently is: '}
-        {multiple
-            ? JSON.stringify(multiValue)
-            : JSON.stringify(singleValue)}
-        </Text>
 
-        <Button
-        title={multiple ? 'Clear fruits' : 'Clear fruit'}
-        onPress={(): void => {
-            if (multiple) setMultiValue(null);
-            else setSingleValue(null);
-        }}
-        />
-    </View>
+      <View style={{...styles.body}}>
+          <Text style={{...styles.description, color}}>
+          {multiple ? 'Fruits currently are: ' : 'Fruit currently is: '}
+          {multiple
+              ? JSON.stringify(multiValue)
+              : JSON.stringify(singleValue)}
+          </Text>
+
+          <Button
+          title={multiple ? 'Clear fruits' : 'Clear fruit'}
+          onPress={(): void => {
+              if (multiple) setMultiValue(null);
+              else setSingleValue(null);
+          }}
+          />
+      </View>
     </View>
   );
 }
