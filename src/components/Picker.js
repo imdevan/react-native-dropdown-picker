@@ -17,7 +17,6 @@ import {
   Modal,
   Platform,
   SafeAreaView,
-  StatusBar,
   StyleSheet,
   Text,
   TextInput,
