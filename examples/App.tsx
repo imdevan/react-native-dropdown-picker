@@ -1,33 +1,7 @@
 import React, { JSX } from 'react';
-import { StyleSheet, View, Text, FlatList, useColorScheme } from 'react-native';
+import { StyleSheet, View, FlatList, useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DropDownPickerExample, { ExampleProps } from './example-src-files/example';
-
-const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-  },
-  container: {
-    flexDirection: 'column',
-    margin: 'auto',
-    marginTop: 64,
-    marginBottom: 64,
-    padding: 3,
-    maxWidth: 600,
-    minWidth: 400
-  },
-  examplesContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    gap: 32
-  },
-  exampleCard: {
-    zIndex:0,
-    borderRadius: 8,
-    marginBottom: 48
-  }
-});
 
 const EXAMPLES: ExampleProps[] = [{
   title: "Default Example",
@@ -71,11 +45,9 @@ export default function App(): JSX.Element {
   const backgroundColor = colorScheme === 'dark' ? '#222' : '#fff';
   
   const renderItem = ({ item }: { item: ExampleProps }) => (
-    <View style={styles.exampleCard} key={item.title}>
       <DropDownPickerExample 
         {...item}
       />
-    </View>
   );
 
   return (
@@ -86,13 +58,44 @@ export default function App(): JSX.Element {
       }}>
         <FlatList
           data={EXAMPLES}
-          style={{zIndex: 0}}
           keyExtractor={(example: ExampleProps) => example.title}
           renderItem={renderItem}
           contentContainerStyle={styles.container}
           showsVerticalScrollIndicator={false}
+          CellRendererComponent={({ index, style, children }) => (
+            // Remove flatlsit view that wraps children for dropdown zIndex support
+            <>{children}</>
+          )}
         />
       </View>
     </GestureHandlerRootView>
   );
 }
+
+const styles = StyleSheet.create({
+  page: {
+    flex: 1,
+  },
+  container: {
+    position: 'relative',
+    flexDirection: 'column',
+    margin: 'auto',
+    zIndex: 1,
+    marginTop: 64,
+    marginBottom: 64,
+    padding: 3,
+    maxWidth: 600,
+    minWidth: 400
+  },
+  examplesContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    gap: 32
+  },
+  exampleCard: {
+    zIndex:0,
+    borderRadius: 8,
+    marginBottom: 48
+  }
+});
