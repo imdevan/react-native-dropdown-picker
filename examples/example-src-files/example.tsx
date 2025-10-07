@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, JSX } from 'react';
 import { StyleSheet, Button, Text, View, useColorScheme } from 'react-native';
 import DropDownPicker, { ItemType,DropDownPickerProps } from 'react-native-dropdown-picker';
 
-type ExampleProps = {
+export type ExampleProps = {
   multiple?: boolean;
   title: string;
   description?: string;
@@ -36,6 +36,11 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 12,
+    marginBottom: 16
+  },
+  body: {
+    fontSize: 12,
+    marginBottom: 72,
   },
   exampleContainer: {
     display: 'flex',
@@ -111,16 +116,14 @@ export default function DropDownPickerExample({
           {...dropdownProps}
         />
       )}
-    <View>
+    <View style={{...styles.body}}>
         <Text style={{...styles.description, color}}>
         {multiple ? 'Fruits currently are: ' : 'Fruit currently is: '}
         {multiple
             ? JSON.stringify(multiValue)
             : JSON.stringify(singleValue)}
         </Text>
-    </View>
 
-    <View>
         <Button
         title={multiple ? 'Clear fruits' : 'Clear fruit'}
         onPress={(): void => {
