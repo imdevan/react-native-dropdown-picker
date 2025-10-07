@@ -25,6 +25,9 @@ import {
 } from 'react-native';
 
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
+
+// Import SafeAreaView from react-native-safe-area-context for better edge-to-edge support
+import { SafeAreaView as SafeAreaContextView } from 'react-native-safe-area-context';
 import {
   ASCII_CODE,
   BADGE_COLORS,
@@ -904,7 +907,15 @@ function Picker({
    * @returns {object}
    */
   const _modalContentContainerStyle = useMemo(
-    () => [THEME.modalContentContainer, ...[modalContentContainerStyle].flat()],
+    () => [
+      THEME.modalContentContainer,
+      // Add edge-to-edge support for Android
+      Platform.OS === 'android' && {
+        flex: 1,
+        backgroundColor: THEME.modalContentContainer.backgroundColor || '#FFFFFF',
+      },
+      ...[modalContentContainerStyle].flat()
+    ],
     [modalContentContainerStyle, THEME],
   );
 
@@ -1936,13 +1947,20 @@ function Picker({
         presentationStyle='fullScreen'
         onRequestClose={onRequestCloseModal}
         {...modalProps}>
-        <SafeAreaView style={_modalContentContainerStyle}>
-          {SearchComponent}
-          {DropDownFlatListComponent}
-        </SafeAreaView>
+        {Platform.OS === 'android' ? (
+          <SafeAreaContextView style={_modalContentContainerStyle} edges={['top', 'bottom', 'left', 'right']}>
+            {SearchComponent}
+            {DropDownFlatListComponent}
+          </SafeAreaContextView>
+        ) : (
+          <SafeAreaView style={_modalContentContainerStyle}>
+            {SearchComponent}
+            {DropDownFlatListComponent}
+          </SafeAreaView>
+        )}
       </Modal>
     ),
-    [open, SearchComponent, _modalContentContainerStyle, modalProps],
+    [open, SearchComponent, DropDownFlatListComponent, _modalContentContainerStyle, modalProps],
   );
 
   /**
