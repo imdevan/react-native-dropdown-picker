@@ -14,7 +14,46 @@ const EXAMPLES: ExampleProps[] = [{
   title: "Multiple Select Badge Mode",
   description: "Multiple select example - with badges",
   multiple: true,
-  dropdownProps: {mode: "BADGE"},
+  dropdownProps: {mode: "BADGE", showBadgeDot: false},
+},{
+  title: "Multiple Select Badge Mode with Dots",
+  description: "Multiple select example - with badges and dots",
+  multiple: true,
+  dropdownProps: {mode: "BADGE", showBadgeDot: true},
+},{
+  title: "Customized Multiple Select Badge Mode",
+  description: "Multiple select example - with badges",
+  multiple: true,
+  dropdownProps: {
+    mode: "BADGE", 
+    showBadgeDot: false,
+    badgeDotStyle: {},
+    badgeColors: '#d5c4a1', // Badge Colors currentlly overwites badgeStyle background color
+    placeholderStyle: {color: '#83a598'},
+    badgeStyle: {
+      // background: '#d5c4a1',
+      borderColor: '#282828',
+      borderWidth: 2, 
+      borderStyle: 'solid',
+    },
+    badgeTextStyle: {
+      color: '#282828'
+    },
+    style: {
+      backgroundColor: '#fbf1c7',
+      borderColor: '#b16286',
+      cursor: 'pointer'
+    },
+    customItemContainerStyle: {
+    },
+    listItemContainerStyle: {
+      backgroundColor: '#fbf1c7',
+      borderColor: '#b16286'
+    },
+    listItemLabelStyle: {
+      color: '#b16286'
+    },
+  },
 },{
   title: "Autoscroll Example",
   description: "This is the default dropdown picker - with autoscroll",
