@@ -1,17 +1,20 @@
-import React, { useState, JSX } from 'react';
-import { StyleSheet, Button, Text, View, useColorScheme } from 'react-native';
-import DropDownPicker, { ItemType,DropDownPickerProps } from 'react-native-dropdown-picker';
+import React, { JSX, useState } from 'react';
+import { Button, StyleSheet, Text, View, useColorScheme } from 'react-native';
+import DropDownPicker, {
+  DropDownPickerProps,
+  ItemType,
+} from 'react-native-dropdown-picker';
 
-export type ExampleProps = {
+export interface ExampleProps {
   multiple?: boolean;
   title: string;
   description?: string;
   placeholder?: string;
   multipleText?: string;
   // For the sake of keeping the examples simple for now
-  items?: ItemType<string>[];
+  items?: Array<ItemType<string>>;
   dropdownProps?: Partial<DropDownPickerProps<string>>;
-};
+}
 
 const DEFAULT_ITEMS = [
   { label: 'Apple', value: 'apple' },
@@ -29,59 +32,65 @@ const DEFAULT_ITEMS = [
 ];
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 24,
-    marginBottom: 4,
-    fontWeight: 'bold',
-  },
-  description: {
-    fontSize: 12,
-    marginBottom: 16
-  },
   body: {
     fontSize: 12,
     marginBottom: 72,
   },
+  description: {
+    fontSize: 12,
+    marginBottom: 16,
+  },
+  dropdownContainer: {
+    zIndex: 1,
+  },
   exampleContainer: {
     display: 'flex',
     flexDirection: 'column',
-    position: 'relative',
     gap: 16,
+    position: 'relative',
   },
-  dropdownContainer: {
-    zIndex: 1
-  }
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
 });
 
 /**
  *
  * @param props
  * @param props.multiple
+ * @param props.title
+ * @param props.description
+ * @param props.dropdownProps
+ * @param props.placeholder
+ * @param props.multipleText
+ * @param props.items
  */
 export default function DropDownPickerExample({
-    multiple = false,
-    title,
-    description,
-    dropdownProps,
-    placeholder = 'Choose a fruit',
-    multipleText='You have chosen {count} fruits.',
-    items = DEFAULT_ITEMS,
+  multiple = false,
+  title,
+  description,
+  dropdownProps,
+  placeholder = 'Choose a fruit',
+  multipleText = 'You have chosen {count} fruits.',
+  items = DEFAULT_ITEMS,
 }: ExampleProps): JSX.Element {
   const [open, setOpen] = useState<boolean>(false);
   const [singleValue, setSingleValue] = useState<string | null>(null);
   const [multiValue, setMultiValue] = useState<Array<string> | null>(null);
   const colorScheme = useColorScheme();
   const color = colorScheme === 'dark' ? '#fff' : '#222';
-  const theme =  colorScheme === 'dark' ? 'DARK' : 'LIGHT';
-  
+  const theme = colorScheme === 'dark' ? 'DARK' : 'LIGHT';
+
   const [_items, setItems] = useState<Array<ItemType<string>>>(items);
-  
+
   return (
     <View style={{ ...styles.exampleContainer, zIndex: open ? 10 : 1 }}>
       <View>
-        <Text style={{...styles.title, color}}>{title}</Text>
+        <Text style={{ ...styles.title, color }}>{title}</Text>
         {description && (
-          <Text style={{...styles.description, color}}>{description}</Text>
+          <Text style={{ ...styles.description, color }}>{description}</Text>
         )}
       </View>
 
@@ -114,21 +123,19 @@ export default function DropDownPickerExample({
         />
       )}
 
-      <View style={{...styles.body}}>
-          <Text style={{...styles.description, color}}>
+      <View style={{ ...styles.body }}>
+        <Text style={{ ...styles.description, color }}>
           {multiple ? 'Fruits currently are: ' : 'Fruit currently is: '}
-          {multiple
-              ? JSON.stringify(multiValue)
-              : JSON.stringify(singleValue)}
-          </Text>
+          {multiple ? JSON.stringify(multiValue) : JSON.stringify(singleValue)}
+        </Text>
 
-          <Button
+        <Button
           title={multiple ? 'Clear fruits' : 'Clear fruit'}
           onPress={(): void => {
-              if (multiple) setMultiValue(null);
-              else setSingleValue(null);
+            if (multiple) setMultiValue(null);
+            else setSingleValue(null);
           }}
-          />
+        />
       </View>
     </View>
   );
