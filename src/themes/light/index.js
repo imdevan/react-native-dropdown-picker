@@ -9,6 +9,23 @@ export const ICONS = {
   CLOSE: require('./icons/close.png'),
 };
 
+export const THEME = {
+  badgeDotBackgroundColor: Colors.GREY,
+  badgeBackgroundColor: Colors.ALTO,
+  dropDownContainerBackgroundColor: Colors.EBONY_CLAY,
+  dropDownContainerBorderColor: Colors.BLACK,
+  itemSeparatorBackgroundColor: Colors.SHUTTLE_GREY,
+  labelColor: Colors.HEATHER,
+  ListItemLabelColor: Colors.HEATHER,
+  modalContentContainerBackgroundColor: Colors.EBONY_CLAY,
+  modalTitleColor: Colors.HEATHER,
+  listMessageTextColor: Colors.HEATHER,
+  searchContainerBorderBottomColor: Colors.SHUTTLE_GREY,
+  searchTextInputBorderColor: Colors.SHUTTLE_GREY,
+  backgroundColor: Colors.WHITE,
+  borderColor: Colors.BLACK
+}
+
 export default StyleSheet.create({
   arrowIcon: {
     height: 20,
@@ -18,7 +35,7 @@ export default StyleSheet.create({
     marginLeft: 10,
   },
   badgeDotStyle: {
-    backgroundColor: Colors.GREY,
+    backgroundColor: THEME.badgeDotBackgroundColor,
     borderRadius: 10 / 2,
     height: 10,
     marginRight: 8,
@@ -29,7 +46,7 @@ export default StyleSheet.create({
   },
   badgeStyle: {
     alignItems: 'center',
-    backgroundColor: Colors.ALTO,
+    backgroundColor: THEME.badgeBackgroundColor,
     borderRadius: 10,
     flexDirection: 'row',
     paddingHorizontal: 10,
@@ -50,8 +67,8 @@ export default StyleSheet.create({
     fontStyle: 'italic',
   },
   dropDownContainer: {
-    backgroundColor: Colors.WHITE,
-    borderColor: Colors.BLACK,
+    backgroundColor: THEME.dropDownContainerBackgroundColor,
+    borderColor: THEME.dropDownContainerBorderColor,
     borderRadius: 8,
     borderWidth: 1,
     overflow: 'hidden',
@@ -75,11 +92,11 @@ export default StyleSheet.create({
     marginRight: 10,
   },
   itemSeparator: {
-    backgroundColor: Colors.BLACK,
+    backgroundColor: THEME.itemSeparatorBackgroundColor,
     height: 1,
   },
   label: {
-    color: Colors.BLACK,
+    color: THEME.labelColor,
     flex: 1,
   },
   labelContainer: {
@@ -105,7 +122,7 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
   },
   listItemLabel: {
-    color: Colors.BLACK,
+    color: THEME.ListItemLabelColor,
     flex: 1,
   },
   listMessageContainer: {
@@ -118,21 +135,22 @@ export default StyleSheet.create({
   listParentContainer: {},
   listParentLabel: {},
   modalContentContainer: {
+    // TODO: add background color
     flexGrow: 1,
   },
   modalTitle: {
-    color: Colors.BLACK,
+    color: THEME.modalTitleColor,
     fontSize: 18,
   },
   searchContainer: {
     alignItems: 'center',
-    borderBottomColor: Colors.BLACK,
+    borderBottomColor: THEME.searchContainerBorderBottomColor,
     borderBottomWidth: 1,
     flexDirection: 'row',
     padding: 10,
   },
   searchTextInput: {
-    borderColor: Colors.BLACK,
+    borderColor: THEME.searchTextInputBorderColor,
     borderRadius: 8,
     borderWidth: 1,
     color: Colors.BLACK,
@@ -146,8 +164,8 @@ export default StyleSheet.create({
   selectedItemLabel: {},
   style: {
     alignItems: 'center',
-    backgroundColor: Colors.WHITE,
-    borderColor: Colors.BLACK,
+    backgroundColor: THEME.backgroundColor,
+    borderColor: THEME.borderColor,
     borderRadius: 8,
     borderWidth: 1,
     flexDirection: 'row',
