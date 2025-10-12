@@ -1,7 +1,8 @@
 import React, { JSX } from 'react';
-import DropDownPickerExample, { ExampleProps } from './example-src-files/example';
-import { FlatList, StyleSheet, View, useColorScheme } from 'react-native';
+import { FlatList, StyleSheet, useColorScheme,View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+import DropDownPickerExample, { ExampleProps } from './example-src-files/example';
 
 const EXAMPLES: Array<ExampleProps> = [{
   title: "Default Example",

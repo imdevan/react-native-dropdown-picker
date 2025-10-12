@@ -8,7 +8,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-
 import {
   ActivityIndicator,
   BackHandler,
@@ -23,11 +22,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
-
 // Import SafeAreaView from react-native-safe-area-context for better edge-to-edge support
 import { SafeAreaView as SafeAreaContextView } from 'react-native-safe-area-context';
+
 import {
   ASCII_CODE,
   BADGE_COLORS,
@@ -43,7 +41,6 @@ import {
   SCHEMA,
   TRANSLATIONS,
 } from '../constants';
-
 import Colors from '../constants/colors';
 import THEMES from '../themes';
 import ListEmpty from './ListEmpty';
