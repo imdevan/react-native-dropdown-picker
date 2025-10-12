@@ -12,6 +12,9 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
+  eslint.configs.recommended,
+  tseslint.configs.recommended,
+  tseslint.configs.stylistic,
   {
     ignores: [
       'node_modules',
@@ -27,11 +30,6 @@ export default tseslint.config(
       '*.yml',
       '*.md',
     ],
-  },
-  eslint.configs.recommended,
-  ...tseslint.configs.recommended,
-  ...tseslint.configs.stylistic,
-  {
     plugins: {
       react,
       'react-hooks': reactHooks,
