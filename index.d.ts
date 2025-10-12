@@ -18,6 +18,7 @@ declare module 'react-native-dropdown-picker' {
     TouchableOpacityProps,
     ViewProps,
     ViewStyle,
+    ImageStyle
   } from 'react-native';
 
   export type ValueType = string | number | boolean;
