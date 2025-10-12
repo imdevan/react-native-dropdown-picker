@@ -3,7 +3,9 @@
   "version": "5.5.1",
   "description": "A single / multiple, categorizable, customizable, localizable and searchable item picker (drop-down) component for react native which supports both Android & iOS.",
   "scripts": {
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "prettier": "prettier --write . --config .prettierrc.yaml --ignore-path .prettierignore",
+    "clean": "npm run lint && npm run prettier"
   },
   "keywords": [
     "picker",
