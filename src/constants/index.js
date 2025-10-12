@@ -99,6 +99,8 @@ export const RTL_STYLE = (rtl, style) => {
         newStyle[STYLE_DIRECTION_KEYS[key]] = newStyle[key];
         delete newStyle[key];
       } else {
+        // todo: consider removing the following. I don't think it is doing anything
+        // eslint-disable-next-line no-self-assign
         newStyle[key] = newStyle[key];
       }
     });
