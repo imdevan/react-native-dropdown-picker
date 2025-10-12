@@ -91,7 +91,7 @@ export default function App(): JSX.Element {
   );
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView>
       <View style={{
         ...styles.page,
         backgroundColor,
@@ -102,7 +102,7 @@ export default function App(): JSX.Element {
           renderItem={renderItem}
           contentContainerStyle={styles.container}
           showsVerticalScrollIndicator={false}
-          CellRendererComponent={({ index, style, children }) => (
+          CellRendererComponent={({ children }) => (
             // Remove flatlsit view that wraps children for dropdown zIndex support
             <>{children}</>
           )}

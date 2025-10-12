@@ -1,6 +1,5 @@
 import React, {
   Fragment,
-  JSX,
   memo,
   useCallback,
   useEffect,
