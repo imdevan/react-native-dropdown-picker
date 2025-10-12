@@ -56,7 +56,8 @@ export default tseslint.config(
       globals: {
         JSX: true,
         require: true,
-        module: true
+        module: true,
+        __dirname: true
       },
     },
     rules: {
@@ -79,7 +80,6 @@ export default tseslint.config(
       '@typescript-eslint/no-require-imports': 'off', // diabling until typescript rewrite
       '@typescript-eslint/no-shadow': 'error',
       '@typescript-eslint/no-use-before-define': 'error',
-      camelcase: 'error',
       'no-underscore-dangle': 'off',
       'comma-dangle': ['error', 'always-multiline'],
       'comma-style': ['error', 'last'],
