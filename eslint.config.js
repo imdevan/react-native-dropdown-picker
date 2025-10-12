@@ -79,7 +79,6 @@ export default tseslint.config(
       ],
       '@typescript-eslint/no-require-imports': 'off', // diabling until typescript rewrite
       '@typescript-eslint/no-shadow': 'error',
-      '@typescript-eslint/no-use-before-define': 'error',
       'no-underscore-dangle': 'off',
       'comma-dangle': ['error', 'always-multiline'],
       'comma-style': ['error', 'last'],
@@ -95,7 +94,6 @@ export default tseslint.config(
       'no-template-curly-in-string': 'error',
       'no-trailing-spaces': 'error',
       'no-undef': 'error',
-      'no-use-before-define': 'warn',
       'react-native/no-inline-styles': 'warn',
       'react/jsx-filename-extension': [
         'error',
