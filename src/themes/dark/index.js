@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-extendableBadgeItemContainer
 import Colors from '../../constants/colors';
 
 export const ICONS = {
