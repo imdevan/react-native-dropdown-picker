@@ -8,6 +8,7 @@ declare module 'react-native-dropdown-picker' {
   } from 'react';
   import {
     FlatListProps,
+    ImageStyle,
     LayoutChangeEvent,
     ModalProps,
     ScrollViewProps,
@@ -17,9 +18,7 @@ declare module 'react-native-dropdown-picker' {
     TextStyle,
     TouchableOpacityProps,
     ViewProps,
-    ViewStyle,
-    ImageStyle
-  } from 'react-native';
+    ViewStyle  } from 'react-native';
 
   export type ValueType = string | number | boolean;
 
