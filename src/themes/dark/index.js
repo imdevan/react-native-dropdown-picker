@@ -9,6 +9,10 @@ export const ICONS = {
   CLOSE: require('./icons/close.png'),
 };
 
+
+/**
+ *  Pulled out colors for clairity and easeier rework
+ */
 export const THEME = {
   badgeDotBackgroundColor: Colors.GREY,
   badgeBackgroundColor: Colors.ALTO,
