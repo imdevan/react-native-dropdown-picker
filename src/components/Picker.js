@@ -446,7 +446,7 @@ function Picker({
 
         if (
           scrollViewRef.current &&
-          itemPositionsRef.current.hasOwnProperty(value)
+          Object.prototype.hasOwnProperty.call(itemPositionsRef.current,value)
         ) {
           scrollViewRef.current?.scrollTo?.({
             x: 0,
@@ -593,7 +593,7 @@ function Picker({
    * @returns {string}
    */
   const _language = useMemo(() => {
-    if (TRANSLATIONS.hasOwnProperty(language)) return language;
+    if (Object.prototype.hasOwnProperty.call(TRANSLATIONS,language)) return language;
 
     return LANGUAGE.FALLBACK;
   }, [language]);
