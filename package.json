@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "eslint . --fix",
     "prettier": "prettier --write . --config .prettierrc.yaml --ignore-path .prettierignore",
-    "clean": "npm run lint && npm run prettier"
+    "clean": "npm run lint & npm run prettier"
   },
   "keywords": [
     "picker",
