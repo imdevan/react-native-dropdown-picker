@@ -57,7 +57,8 @@ export default tseslint.config(
         JSX: true,
         require: true,
         module: true,
-        __dirname: true
+        __dirname: true,
+        setTimeout: true
       },
     },
     rules: {
