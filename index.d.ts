@@ -82,7 +82,7 @@ declare module 'react-native-dropdown-picker' {
     NOTHING_TO_SHOW: string;
     PLACEHOLDER: string;
     SEARCH_PLACEHOLDER: string;
-    SELECTED_ITEMS_COUNT_TEXT: string | { [key in number | 'n']: string };
+    SELECTED_ITEMS_COUNT_TEXT: string | Record<number | 'n', string>;
   }
 
   export type ThemeNameType = 'DEFAULT' | 'LIGHT' | 'DARK';

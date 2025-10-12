@@ -62,7 +62,6 @@
   "exclude": [
     /* Filenames or patterns that should be skipped when resolving include. */
     "dist",
-    "node_modules",
-    "eslint.config.js"
+    "node_modules"
   ]
 }

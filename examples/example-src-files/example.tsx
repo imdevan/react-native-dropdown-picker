@@ -1,17 +1,17 @@
-import React, { useState, JSX } from 'react';
-import { StyleSheet, Button, Text, View, useColorScheme } from 'react-native';
-import DropDownPicker, { ItemType,DropDownPickerProps } from 'react-native-dropdown-picker';
+import React, { JSX, useState } from 'react';
+import { Button, StyleSheet, Text, View, useColorScheme } from 'react-native';
+import DropDownPicker, { DropDownPickerProps,ItemType } from 'react-native-dropdown-picker';
 
-export type ExampleProps = {
+export interface ExampleProps {
   multiple?: boolean;
   title: string;
   description?: string;
   placeholder?: string;
   multipleText?: string;
   // For the sake of keeping the examples simple for now
-  items?: ItemType<string>[];
+  items?: Array<ItemType<string>>;
   dropdownProps?: Partial<DropDownPickerProps<string>>;
-};
+}
 
 const DEFAULT_ITEMS = [
   { label: 'Apple', value: 'apple' },

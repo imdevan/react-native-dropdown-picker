@@ -1,9 +1,9 @@
 import React, { JSX } from 'react';
-import { StyleSheet, View, FlatList, useColorScheme } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import DropDownPickerExample, { ExampleProps } from './example-src-files/example';
+import { FlatList, StyleSheet, View, useColorScheme } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-const EXAMPLES: ExampleProps[] = [{
+const EXAMPLES: Array<ExampleProps> = [{
   title: "Default Example",
   description: "This is the default dropdown picker"
 },{

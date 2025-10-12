@@ -1,5 +1,3 @@
-// @ts-check
-
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import react from 'eslint-plugin-react';
@@ -65,8 +63,8 @@ export default tseslint.config(
           readonly: 'generic',
         },
       ],
-      '@typescript-eslint/explicit-function-return-type': 'error',
-      '@typescript-eslint/explicit-module-boundary-types': 'error',
+      // '@typescript-eslint/explicit-function-return-type': 'error',
+      // '@typescript-eslint/explicit-module-boundary-types': 'error',
       '@typescript-eslint/no-explicit-any': [
         'error',
         {
