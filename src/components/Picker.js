@@ -149,7 +149,7 @@ function Picker({
   searchable = false,
   searchContainerStyle = {},
   searchPlaceholder = null,
-  searchPlaceholderTextColor = Colors.GREY,
+  searchPlaceholderTextColor = Colors.GREY, // Todo: this default should come from the theme? 
   searchTextInputProps = {},
   searchTextInputStyle = {},
   searchWithRegionalAccents = false,
