@@ -371,12 +371,13 @@ function Picker({
   }, [setOpen, onClose]);
 
   /**
-   * onPressClose.
+   * onPressOpen.
+   * todo: consider removing 
    */
-  const onPressOpen = useCallback(() => {
-    setOpen(true);
-    onOpen();
-  }, [setOpen, onOpen]);
+  // const onPressOpen = useCallback(() => {
+  //   setOpen(true);
+  //   onOpen();
+  // }, [setOpen, onOpen]);
 
   /**
    * onPressToggle.
