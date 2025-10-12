@@ -9,19 +9,23 @@ export const ICONS = {
   CLOSE: require('./icons/close.png'),
 };
 
+/**
+ *  Pulled out colors for clairity and easeier rework
+ */
 export const THEME = {
   badgeDotBackgroundColor: Colors.GREY,
   badgeBackgroundColor: Colors.ALTO,
-  dropDownContainerBackgroundColor: Colors.EBONY_CLAY,
+  dropDownContainerBackgroundColor: Colors.WHITE,
   dropDownContainerBorderColor: Colors.BLACK,
-  itemSeparatorBackgroundColor: Colors.SHUTTLE_GREY,
-  labelColor: Colors.HEATHER,
-  ListItemLabelColor: Colors.HEATHER,
-  modalContentContainerBackgroundColor: Colors.EBONY_CLAY,
-  modalTitleColor: Colors.HEATHER,
-  listMessageTextColor: Colors.HEATHER,
-  searchContainerBorderBottomColor: Colors.SHUTTLE_GREY,
-  searchTextInputBorderColor: Colors.SHUTTLE_GREY,
+  itemSeparatorBackgroundColor: Colors.BLACK,
+  labelColor: Colors.BLACK,
+  listItemLabelColor: Colors.BLACK,
+  modalContentContainerBackgroundColor: Colors.WHITE,
+  modalTitleColor: Colors.BLACK,
+  listMessageTextColor: Colors.BLACK, // not currently used
+  searchContainerBorderBottomColor: Colors.BLACK,
+  searchTextInputBorderColor: Colors.BLACK,
+  searchTextInputColor: Colors.BLACK,
   backgroundColor: Colors.WHITE,
   borderColor: Colors.BLACK
 }
@@ -122,7 +126,7 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
   },
   listItemLabel: {
-    color: THEME.ListItemLabelColor,
+    color: THEME.listItemLabelColor,
     flex: 1,
   },
   listMessageContainer: {
@@ -153,7 +157,7 @@ export default StyleSheet.create({
     borderColor: THEME.searchTextInputBorderColor,
     borderRadius: 8,
     borderWidth: 1,
-    color: Colors.BLACK,
+    color: THEME.searchTextInputColor,
     flexGrow: 1,
     flexShrink: 1,
     margin: 0,
