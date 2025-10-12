@@ -77,6 +77,7 @@ export default function DropDownPickerExample({
   const [_items, setItems] = useState<Array<ItemType<string>>>(items);
   
   return (
+    // eslint-disable-next-line react-native/no-inline-styles
     <View style={{ ...styles.exampleContainer, zIndex: open ? 10 : 1 }}>
       <View>
         <Text style={{...styles.title, color}}>{title}</Text>
