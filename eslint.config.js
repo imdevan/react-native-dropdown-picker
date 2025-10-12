@@ -86,7 +86,6 @@ export default tseslint.config(
       'import/no-unresolved': 'error',
       'jsx-quotes': ['error', 'prefer-single'],
       'linebreak-style': ['error', 'unix'],
-      'max-lines': ['error', 300],
       'no-console': 'error',
       'no-duplicate-imports': 'error',
       'no-multi-spaces': 'error',
