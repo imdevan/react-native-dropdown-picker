@@ -1,14 +1,15 @@
 import eslint from '@eslint/js';
-// eslint-disable-next-line import/no-unresolved
-import tseslint from 'typescript-eslint';
+import prettier from 'eslint-config-prettier';
+import eslintComments from 'eslint-plugin-eslint-comments';
+import imprt from 'eslint-plugin-import';
+import json from 'eslint-plugin-json';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactNative from 'eslint-plugin-react-native';
-import jsxA11y from 'eslint-plugin-jsx-a11y';
-import eslintComments from 'eslint-plugin-eslint-comments';
-import json from 'eslint-plugin-json';
-import imprt from 'eslint-plugin-import';
-import prettier from 'eslint-config-prettier';
+import simpleImportSort from 'eslint-plugin-simple-import-sort'
+// eslint-disable-next-line import/no-unresolved
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
@@ -40,6 +41,7 @@ export default tseslint.config(
       'eslint-comments': eslintComments,
       json,
       import: imprt,
+      simpleImportSort
     },
     languageOptions: {
       parser: tseslint.parser,
@@ -53,7 +55,8 @@ export default tseslint.config(
       },
       globals: {
         JSX: true,
-        require: true
+        require: true,
+        module: true
       },
     },
     rules: {
@@ -100,8 +103,8 @@ export default tseslint.config(
           extensions: ['.ts', '.tsx', '.js', '.jsx'],
         },
       ],
+      "simpleImportSort/imports":  ["error"],
       'react/prop-types': 'off', // Disabling until typescript rewrite
-      'sort-imports': 'warn',
     },
   },
   prettier,
