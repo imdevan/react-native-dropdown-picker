@@ -1,4 +1,5 @@
 const { getDefaultConfig } = require('expo/metro-config');
+// const exclusionList = require('metro-config/src/defaults/exclusionList');
 const path = require('path');
 
 const projectRoot = __dirname;
@@ -13,6 +14,27 @@ config.resolver = {
   nodeModulesPaths: [
     path.join(projectRoot, 'node_modules'),
     path.join(workspaceRoot, 'node_modules'),
+  ],
+  
+  // Ignore common explosion points
+  blockList: [
+    // avoid triply nested node_modules to resolve issue with using a local copy of the module
+    /.*\/node_modules\/.*\/node_modules\/.*\/node_modules\/.*/,
+
+    // build artifacts
+    /.*\/\.expo\/.*/,
+    /.*\/\.turbo\/.*/,
+    /.*\/\.next\/.*/,
+    /.*\/coverage\/.*/,
+
+    // VCS and caches
+    /.*\/\.git\/.*/,
+    /.*\/\.cache\/.*/,
+
+    // optional: ignore example/demo apps in a monorepo
+    // /.*\/examples\/.*
+    // /.*\/example\/.*/,
+    /.*\/e2e\/.*/,
   ],
   unstable_enableSymlinks: true,
   unstable_enablePackageExports: true,
