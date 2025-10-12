@@ -79,7 +79,13 @@ export default tseslint.config(
       ],
       '@typescript-eslint/no-require-imports': 'off', // diabling until typescript rewrite
       '@typescript-eslint/no-shadow': 'error',
-      '@typescript-eslint/no-empty-function': 'off', // disabling due to lots of functions defaulting to empty
+      '@typescript-eslint/no-empty-function': 'off', // disabling due to lots of functions defaulting to empt@typescript-eslint/no-empty-functiony
+      '@typescript-eslint/no-unused-vars': [
+          "error",
+          {
+              caughtErrors: "none"
+          }
+      ],
       'no-underscore-dangle': 'off',
       'comma-dangle': ['error', 'always-multiline'],
       'comma-style': ['error', 'last'],
