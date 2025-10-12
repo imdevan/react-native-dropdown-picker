@@ -15,10 +15,8 @@ config.watchFolders = [workspaceRoot];
 
 config.resolver = {
   ...config.resolver,
-  nodeModulesPaths: [
-    path.join(projectRoot, 'node_modules'),
-  ],
-  
+  nodeModulesPaths: [path.join(projectRoot, 'node_modules')],
+
   // Ignore common explosion points
   blockList: [
     new RegExp(`^${escapeRegExp(parentNodeModules)}[/\\\\].*`),

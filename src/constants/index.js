@@ -79,7 +79,7 @@ export const RTL_DIRECTION = (rtl, style) => {
   const newStyle = { ...style };
 
   if (rtl && !I18nManager.isRTL) {
-    if (Object.prototype.hasOwnProperty.call(newStyle, "flexDirection")) {
+    if (Object.prototype.hasOwnProperty.call(newStyle, 'flexDirection')) {
       newStyle.flexDirection =
         newStyle.flexDirection === 'row' ? 'row-reverse' : 'row';
     } else {

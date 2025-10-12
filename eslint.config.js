@@ -7,7 +7,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactNative from 'eslint-plugin-react-native';
-import simpleImportSort from 'eslint-plugin-simple-import-sort'
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
 // eslint-disable-next-line import/no-unresolved
 import tseslint from 'typescript-eslint';
 
@@ -40,8 +40,8 @@ export default tseslint.config(
       '@typescript-eslint': tseslint.plugin,
       'eslint-comments': eslintComments,
       json,
-      import: imprt,
-      simpleImportSort
+      'import': imprt,
+      simpleImportSort,
     },
     languageOptions: {
       parser: tseslint.parser,
@@ -58,7 +58,7 @@ export default tseslint.config(
         require: true,
         module: true,
         __dirname: true,
-        setTimeout: true
+        setTimeout: true,
       },
     },
     rules: {
@@ -82,10 +82,10 @@ export default tseslint.config(
       '@typescript-eslint/no-shadow': 'error',
       '@typescript-eslint/no-empty-function': 'off', // disabling due to lots of functions defaulting to empt@typescript-eslint/no-empty-functiony
       '@typescript-eslint/no-unused-vars': [
-          "error",
-          {
-              caughtErrors: "none"
-          }
+        'error',
+        {
+          caughtErrors: 'none',
+        },
       ],
       'no-underscore-dangle': 'off',
       'comma-dangle': ['error', 'always-multiline'],
@@ -108,7 +108,7 @@ export default tseslint.config(
           extensions: ['.ts', '.tsx', '.js', '.jsx'],
         },
       ],
-      "simpleImportSort/imports":  ["error"],
+      'simpleImportSort/imports': ['error'],
       'react/prop-types': 'off', // Disabling until typescript rewrite
     },
   },

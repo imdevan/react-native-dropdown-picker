@@ -9,7 +9,6 @@ export const ICONS = {
   CLOSE: require('./icons/close.png'),
 };
 
-
 /**
  *  Pulled out colors for clairity and easeier rework
  */
@@ -28,8 +27,8 @@ export const THEME = {
   searchTextInputBorderColor: Colors.SHUTTLE_GREY,
   searchTextInputColor: Colors.WHITE,
   backgroundColor: Colors.EBONY_CLAY,
-  borderColor: Colors.BLACK
-}
+  borderColor: Colors.BLACK,
+};
 
 export default StyleSheet.create({
   arrowIcon: {
@@ -88,7 +87,7 @@ export default StyleSheet.create({
   },
   extendableBadgeItemContainer: {
     marginEnd: 7,
-    marginVertical: 3
+    marginVertical: 3,
   },
   flatListContentContainer: {
     flexGrow: 1,

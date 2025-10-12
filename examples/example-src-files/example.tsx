@@ -1,6 +1,9 @@
 import React, { JSX, useState } from 'react';
-import { Button, StyleSheet, Text, useColorScheme,View } from 'react-native';
-import DropDownPicker, { DropDownPickerProps,ItemType } from 'react-native-dropdown-picker';
+import { Button, StyleSheet, Text, useColorScheme, View } from 'react-native';
+import DropDownPicker, {
+  DropDownPickerProps,
+  ItemType,
+} from 'react-native-dropdown-picker';
 
 export interface ExampleProps {
   multiple?: boolean;
@@ -36,7 +39,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 12,
-    marginBottom: 16
+    marginBottom: 16,
   },
   body: {
     fontSize: 12,
@@ -49,8 +52,8 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   dropdownContainer: {
-    zIndex: 1
-  }
+    zIndex: 1,
+  },
 });
 
 /**
@@ -59,30 +62,30 @@ const styles = StyleSheet.create({
  * @param props.multiple
  */
 export default function DropDownPickerExample({
-    multiple = false,
-    title,
-    description,
-    dropdownProps,
-    placeholder = 'Choose a fruit',
-    multipleText='You have chosen {count} fruits.',
-    items = DEFAULT_ITEMS,
+  multiple = false,
+  title,
+  description,
+  dropdownProps,
+  placeholder = 'Choose a fruit',
+  multipleText = 'You have chosen {count} fruits.',
+  items = DEFAULT_ITEMS,
 }: ExampleProps): JSX.Element {
   const [open, setOpen] = useState<boolean>(false);
   const [singleValue, setSingleValue] = useState<string | null>(null);
   const [multiValue, setMultiValue] = useState<Array<string> | null>(null);
   const colorScheme = useColorScheme();
   const color = colorScheme === 'dark' ? '#fff' : '#222';
-  const theme =  colorScheme === 'dark' ? 'DARK' : 'LIGHT';
-  
+  const theme = colorScheme === 'dark' ? 'DARK' : 'LIGHT';
+
   const [_items, setItems] = useState<Array<ItemType<string>>>(items);
-  
+
   return (
     // eslint-disable-next-line react-native/no-inline-styles
     <View style={{ ...styles.exampleContainer, zIndex: open ? 10 : 1 }}>
       <View>
-        <Text style={{...styles.title, color}}>{title}</Text>
+        <Text style={{ ...styles.title, color }}>{title}</Text>
         {description && (
-          <Text style={{...styles.description, color}}>{description}</Text>
+          <Text style={{ ...styles.description, color }}>{description}</Text>
         )}
       </View>
 
@@ -115,21 +118,19 @@ export default function DropDownPickerExample({
         />
       )}
 
-      <View style={{...styles.body}}>
-          <Text style={{...styles.description, color}}>
+      <View style={{ ...styles.body }}>
+        <Text style={{ ...styles.description, color }}>
           {multiple ? 'Fruits currently are: ' : 'Fruit currently is: '}
-          {multiple
-              ? JSON.stringify(multiValue)
-              : JSON.stringify(singleValue)}
-          </Text>
+          {multiple ? JSON.stringify(multiValue) : JSON.stringify(singleValue)}
+        </Text>
 
-          <Button
+        <Button
           title={multiple ? 'Clear fruits' : 'Clear fruit'}
           onPress={(): void => {
-              if (multiple) setMultiValue(null);
-              else setSingleValue(null);
+            if (multiple) setMultiValue(null);
+            else setSingleValue(null);
           }}
-          />
+        />
       </View>
     </View>
   );

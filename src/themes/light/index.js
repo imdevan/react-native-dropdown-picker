@@ -27,8 +27,8 @@ export const THEME = {
   searchTextInputBorderColor: Colors.BLACK,
   searchTextInputColor: Colors.BLACK,
   backgroundColor: Colors.WHITE,
-  borderColor: Colors.BLACK
-}
+  borderColor: Colors.BLACK,
+};
 
 export default StyleSheet.create({
   arrowIcon: {

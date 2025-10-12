@@ -33,7 +33,7 @@ Picker.addTranslation = (language, translation) => {
 };
 
 Picker.modifyTranslation = (language, translation) => {
-  if (Object.prototype.hasOwnProperty.call(TRANSLATIONS,language)) {
+  if (Object.prototype.hasOwnProperty.call(TRANSLATIONS, language)) {
     TRANSLATIONS[language] = { ...TRANSLATIONS[language], ...translation };
   }
 };

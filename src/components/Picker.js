@@ -144,7 +144,7 @@ function Picker({
   searchable = false,
   searchContainerStyle = {},
   searchPlaceholder = null,
-  searchPlaceholderTextColor = Colors.GREY, // Todo: this default should come from the theme? 
+  searchPlaceholderTextColor = Colors.GREY, // Todo: this default should come from the theme?
   searchTextInputProps = {},
   searchTextInputStyle = {},
   searchWithRegionalAccents = false,
@@ -372,7 +372,7 @@ function Picker({
 
   /**
    * onPressOpen.
-   * todo: consider removing 
+   * todo: consider removing
    */
   // const onPressOpen = useCallback(() => {
   //   setOpen(true);
@@ -445,7 +445,10 @@ function Picker({
 
         if (
           scrollViewRef.current &&
-          Object.prototype.hasOwnProperty.call(itemPositionsRef.current,currentValue)
+          Object.prototype.hasOwnProperty.call(
+            itemPositionsRef.current,
+            currentValue,
+          )
         ) {
           scrollViewRef.current?.scrollTo?.({
             x: 0,
@@ -555,7 +558,9 @@ function Picker({
     ) {
       results.push({
         [ITEM_SCHEMA.label]: searchText,
-        [ITEM_SCHEMA.value]: customItemValueDelimiter ? searchText.replaceAll(' ', customItemValueDelimiter) : searchText,
+        [ITEM_SCHEMA.value]: customItemValueDelimiter
+          ? searchText.replaceAll(' ', customItemValueDelimiter)
+          : searchText,
         custom: true,
       });
     }
@@ -592,7 +597,8 @@ function Picker({
    * @returns {string}
    */
   const _language = useMemo(() => {
-    if (Object.prototype.hasOwnProperty.call(TRANSLATIONS,language)) return language;
+    if (Object.prototype.hasOwnProperty.call(TRANSLATIONS, language))
+      return language;
 
     return LANGUAGE.FALLBACK;
   }, [language]);
@@ -908,9 +914,10 @@ function Picker({
       // Add edge-to-edge support for Android
       Platform.OS === 'android' && {
         flex: 1,
-        backgroundColor: THEME.modalContentContainer.backgroundColor || '#FFFFFF',
+        backgroundColor:
+          THEME.modalContentContainer.backgroundColor || '#FFFFFF',
       },
-      ...[modalContentContainerStyle].flat()
+      ...[modalContentContainerStyle].flat(),
     ],
     [modalContentContainerStyle, THEME],
   );
@@ -1259,7 +1266,9 @@ function Picker({
    */
   const BadgeBodyComponent = useMemo(() => {
     if (extendableBadgeContainer) {
-      return <ExtendableBadgeContainer badgeContainerSelectedItems={selectedItems} />;
+      return (
+        <ExtendableBadgeContainer badgeContainerSelectedItems={selectedItems} />
+      );
     }
 
     return (
@@ -1756,7 +1765,7 @@ function Picker({
   const _modalTitleStyle = useMemo(
     () => [
       THEME.modalTitle,
-       ...[textStyle].flat(),
+      ...[textStyle].flat(),
       ...[modalTitleStyle].flat(),
     ],
     [textStyle, modalTitleStyle, THEME],
@@ -1944,7 +1953,9 @@ function Picker({
         onRequestClose={onRequestCloseModal}
         {...modalProps}>
         {Platform.OS === 'android' ? (
-          <SafeAreaContextView style={_modalContentContainerStyle} edges={['top', 'bottom', 'left', 'right']}>
+          <SafeAreaContextView
+            style={_modalContentContainerStyle}
+            edges={['top', 'bottom', 'left', 'right']}>
             {SearchComponent}
             {DropDownFlatListComponent}
           </SafeAreaContextView>
@@ -1956,7 +1967,13 @@ function Picker({
         )}
       </Modal>
     ),
-    [open, SearchComponent, DropDownFlatListComponent, _modalContentContainerStyle, modalProps],
+    [
+      open,
+      SearchComponent,
+      DropDownFlatListComponent,
+      _modalContentContainerStyle,
+      modalProps,
+    ],
   );
 
   /**
