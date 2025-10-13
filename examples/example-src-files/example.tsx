@@ -160,16 +160,16 @@ export default function DropDownPickerExample({
           <CodeSnippet
             code={`<DropDownPicker              
 ${dropdownProps ? 
-`  /* custom properties */ \n` + Object.entries(dropdownProps || {})
+`  /* Custom properties */ \n` + Object.entries(dropdownProps || {})
   .map(([key, value]) => {
     if (typeof value === 'string') {
       return `  ${key}='${value}'`;
     }
     return `  ${key}={${JSON.stringify(value)}}`;
   })
-  .join('\n') + '\n\n' : ''}  /* boilerplate */
+  .join('\n') + '\n\n' : ''}  /* Boilerplate */
   open={open}              
-  items={_items}
+  items={items}
   setOpen={setOpen}
   setItems={setItems}
   theme={theme}
@@ -177,10 +177,9 @@ ${dropdownProps ?
 ${multiple ? 
 `  setValue={setMultiValue}
   value={multiValue}
-  multiple` : 
+  multiple={true}` : 
 `  setValue={setSingleValue}
-  value={singleValue}
-  multiple={false}`}
+  value={singleValue}`}
 />`}
           />
       </View>
