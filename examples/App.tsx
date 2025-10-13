@@ -2,8 +2,6 @@ import React, { JSX } from 'react';
 import { FlatList, StyleSheet, useColorScheme, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-// todo: resolve import with eslint compliance
-// eslint-disable-next-line import/no-unresolved
 import DropDownPickerExample, {
   ExampleProps,
 } from './example-src-files/example';

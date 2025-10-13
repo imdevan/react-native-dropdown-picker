@@ -1,14 +1,12 @@
 import eslint from '@eslint/js';
 import prettier from 'eslint-config-prettier';
 import eslintComments from 'eslint-plugin-eslint-comments';
-import imprt from 'eslint-plugin-import';
 import json from 'eslint-plugin-json';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactNative from 'eslint-plugin-react-native';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
-// eslint-disable-next-line import/no-unresolved
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
@@ -38,7 +36,6 @@ export default tseslint.config(
       '@typescript-eslint': tseslint.plugin,
       'eslint-comments': eslintComments,
       json,
-      'import': imprt,
       simpleImportSort,
     },
     languageOptions: {
@@ -88,8 +85,6 @@ export default tseslint.config(
       'no-underscore-dangle': 'off',
       'comma-dangle': ['error', 'always-multiline'],
       'comma-style': ['error', 'last'],
-      'import/extensions': ['error', 'never'],
-      'import/no-unresolved': 'error',
       'jsx-quotes': ['error', 'prefer-single'],
       'linebreak-style': ['error', 'unix'],
       'no-console': 'error',
