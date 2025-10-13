@@ -13,7 +13,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import SyntaxHighlighter from 'react-native-syntax-highlighter';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { ghcolors, tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const styles = StyleSheet.create({
@@ -74,7 +74,7 @@ export default function CodeSnippet({ code }: CodeSnippetProps): JSX.Element {
       </Pressable>
       <Animated.View style={animatedStyle}>
         <View onLayout={onLayout} style={styles.codeContainer}>
-          <SyntaxHighlighter language='jsx' style={syntaxStyle} highlighter={"prism"}>
+          <SyntaxHighlighter language='jsx' style={syntaxStyle}>
             {code}
           </SyntaxHighlighter>
         </View>
