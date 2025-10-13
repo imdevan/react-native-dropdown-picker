@@ -6,6 +6,7 @@ import DropDownPicker, {
   ItemType,
   ValueType,
 } from 'react-native-dropdown-picker';
+import CodeSnippet from './CodeSnippet';
 
 // Omit these types from the example props
 type CommonOmitKeys = 'setValue' | 'value' | 'open' | 'items' | 'setOpen';
@@ -23,6 +24,7 @@ type MultipleDropdownProps<T extends ValueType> = Omit<
 export interface ExampleProps {
   title: string;
   description?: string;
+  code?: string;
   placeholder?: string;
   multipleText?: string;
   items?: Array<ItemType<ValueType>>;
@@ -154,6 +156,33 @@ export default function DropDownPickerExample({
             else setSingleValue(null);
           }}
         />
+
+          <CodeSnippet
+            code={`<DropDownPicker              
+${dropdownProps ? 
+`  /* custom properties */ \n` + Object.entries(dropdownProps || {})
+  .map(([key, value]) => {
+    if (typeof value === 'string') {
+      return `  ${key}='${value}'`;
+    }
+    return `  ${key}={${JSON.stringify(value)}}`;
+  })
+  .join('\n') + '\n\n' : ''}  /* boilerplate */
+  open={open}              
+  items={_items}
+  setOpen={setOpen}
+  setItems={setItems}
+  theme={theme}
+  placeholder={placeholder}
+${multiple ? 
+`  setValue={setMultiValue}
+  value={multiValue}
+  multiple` : 
+`  setValue={setSingleValue}
+  value={singleValue}
+  multiple={false}`}
+/>`}
+          />
       </View>
     </View>
   );
