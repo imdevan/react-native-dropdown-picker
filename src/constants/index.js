@@ -79,7 +79,7 @@ export const RTL_DIRECTION = (rtl, style) => {
   const newStyle = { ...style };
 
   if (rtl && !I18nManager.isRTL) {
-    if (newStyle.hasOwnProperty('flexDirection')) {
+    if (Object.prototype.hasOwnProperty.call(newStyle, 'flexDirection')) {
       newStyle.flexDirection =
         newStyle.flexDirection === 'row' ? 'row-reverse' : 'row';
     } else {
@@ -95,10 +95,12 @@ export const RTL_STYLE = (rtl, style) => {
 
   if (rtl && !I18nManager.isRTL) {
     Object.keys(style).map((key) => {
-      if (STYLE_DIRECTION_KEYS.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(STYLE_DIRECTION_KEYS, key)) {
         newStyle[STYLE_DIRECTION_KEYS[key]] = newStyle[key];
         delete newStyle[key];
       } else {
+        // todo: consider removing the following. I don't think it is doing anything
+        // eslint-disable-next-line no-self-assign
         newStyle[key] = newStyle[key];
       }
     });

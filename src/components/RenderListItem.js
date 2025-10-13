@@ -1,5 +1,4 @@
 import React, { memo, useCallback, useMemo } from 'react';
-
 import { Text, TouchableOpacity } from 'react-native';
 
 function RenderListItem({

@@ -1,6 +1,5 @@
 import React, {
   Fragment,
-  JSX,
   memo,
   useCallback,
   useEffect,
@@ -8,7 +7,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-
 import {
   ActivityIndicator,
   BackHandler,
@@ -23,13 +21,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
-
 // Import SafeAreaView from react-native-safe-area-context for better edge-to-edge support
 import { SafeAreaView as SafeAreaContextView } from 'react-native-safe-area-context';
+
 import {
-  ASCII_CODE,
   BADGE_COLORS,
   BADGE_DOT_COLORS,
   DROPDOWN_DIRECTION,
@@ -43,7 +39,6 @@ import {
   SCHEMA,
   TRANSLATIONS,
 } from '../constants';
-
 import Colors from '../constants/colors';
 import THEMES from '../themes';
 import ListEmpty from './ListEmpty';
@@ -58,7 +53,7 @@ function Picker({
   open,
   setOpen = () => {},
   value = null,
-  setValue = (callback) => {},
+  setValue = () => {},
   activityIndicatorColor = Colors.GREY,
   ActivityIndicatorComponent = null,
   activityIndicatorSize = 30,
@@ -130,14 +125,14 @@ function Picker({
   mode = MODE.DEFAULT,
   multiple = false,
   multipleText = null,
-  onChangeSearchText = (text) => {},
-  onChangeValue = (value) => {},
+  onChangeSearchText = () => {},
+  onChangeValue = () => {},
   onClose = () => {},
-  onDirectionChanged = (direction) => {},
-  onLayout = (e) => {},
+  onDirectionChanged = () => {},
+  onLayout = () => {},
   onOpen = () => {},
-  onPress = (open) => {},
-  onSelectItem = (item) => {},
+  onPress = () => {},
+  onSelectItem = () => {},
   placeholder = null,
   placeholderStyle = {},
   props = {},
@@ -149,7 +144,7 @@ function Picker({
   searchable = false,
   searchContainerStyle = {},
   searchPlaceholder = null,
-  searchPlaceholderTextColor = Colors.GREY, // Todo: this default should come from the theme? 
+  searchPlaceholderTextColor = Colors.GREY, // Todo: this default should come from the theme?
   searchTextInputProps = {},
   searchTextInputStyle = {},
   searchWithRegionalAccents = false,
@@ -280,7 +275,7 @@ function Picker({
 
           if (itemIndex === -1) {
             const item = items.find(
-              (item) => item[ITEM_SCHEMA.value] === currentValue,
+              (i) => i[ITEM_SCHEMA.value] === currentValue,
             );
 
             if (item) {
@@ -299,7 +294,7 @@ function Picker({
       const state = [];
 
       if (value !== null) {
-        const item = items.find((item) => item[ITEM_SCHEMA.value] === value);
+        const item = items.find((i) => i[ITEM_SCHEMA.value] === value);
 
         if (item) {
           state.push(item);
@@ -376,12 +371,13 @@ function Picker({
   }, [setOpen, onClose]);
 
   /**
-   * onPressClose.
+   * onPressOpen.
+   * todo: consider removing
    */
-  const onPressOpen = useCallback(() => {
-    setOpen(true);
-    onOpen();
-  }, [setOpen, onOpen]);
+  // const onPressOpen = useCallback(() => {
+  //   setOpen(true);
+  //   onOpen();
+  // }, [setOpen, onOpen]);
 
   /**
    * onPressToggle.
@@ -403,7 +399,7 @@ function Picker({
    * @returns {object}
    */
   const sortedItems = useMemo(() => {
-    const sortedItems = items.filter(
+    const _sortedItems = items.filter(
       (item) =>
         item[ITEM_SCHEMA.parent] === undefined ||
         item[ITEM_SCHEMA.parent] === null,
@@ -415,18 +411,18 @@ function Picker({
     );
 
     children.forEach((child) => {
-      const index = sortedItems.findIndex(
+      const index = _sortedItems.findIndex(
         (item) =>
           item[ITEM_SCHEMA.parent] === child[ITEM_SCHEMA.parent] ||
           item[ITEM_SCHEMA.value] === child[ITEM_SCHEMA.parent],
       );
 
       if (index > -1) {
-        sortedItems.splice(index + 1, 0, child);
+        _sortedItems.splice(index + 1, 0, child);
       }
     });
 
-    return sortedItems;
+    return _sortedItems;
   }, [items, ITEM_SCHEMA]);
 
   /**
@@ -443,22 +439,25 @@ function Picker({
         )
           return;
 
-        const value = isArray
+        const currentValue = isArray
           ? memoryRef.current.value[0]
           : memoryRef.current.value;
 
         if (
           scrollViewRef.current &&
-          itemPositionsRef.current.hasOwnProperty(value)
+          Object.prototype.hasOwnProperty.call(
+            itemPositionsRef.current,
+            currentValue,
+          )
         ) {
           scrollViewRef.current?.scrollTo?.({
             x: 0,
-            y: itemPositionsRef.current[value],
+            y: itemPositionsRef.current[currentValue],
             animated: true,
           });
         } else {
           const index = sortedItems.findIndex(
-            (item) => item[ITEM_SCHEMA.value] === value,
+            (item) => item[ITEM_SCHEMA.value] === currentValue,
           );
 
           if (index > -1)
@@ -486,7 +485,7 @@ function Picker({
    * @returns {object}
    */
   const stickyHeaderIndices = useMemo(() => {
-    const stickyHeaderIndices = [];
+    const _stickyHeaderIndices = [];
     if (stickyHeader) {
       const parents = sortedItems.filter(
         (item) =>
@@ -497,10 +496,10 @@ function Picker({
         const index = sortedItems.findIndex(
           (item) => item[ITEM_SCHEMA.value] === parent[ITEM_SCHEMA.value],
         );
-        if (index > -1) stickyHeaderIndices.push(index);
+        if (index > -1) _stickyHeaderIndices.push(index);
       });
     }
-    return stickyHeaderIndices;
+    return _stickyHeaderIndices;
   }, [stickyHeader, sortedItems]);
 
   /**
@@ -559,7 +558,9 @@ function Picker({
     ) {
       results.push({
         [ITEM_SCHEMA.label]: searchText,
-        [ITEM_SCHEMA.value]: customItemValueDelimiter ? searchText.replaceAll(' ', customItemValueDelimiter) : searchText,
+        [ITEM_SCHEMA.value]: customItemValueDelimiter
+          ? searchText.replaceAll(' ', customItemValueDelimiter)
+          : searchText,
         custom: true,
       });
     }
@@ -596,7 +597,8 @@ function Picker({
    * @returns {string}
    */
   const _language = useMemo(() => {
-    if (TRANSLATIONS.hasOwnProperty(language)) return language;
+    if (Object.prototype.hasOwnProperty.call(TRANSLATIONS, language))
+      return language;
 
     return LANGUAGE.FALLBACK;
   }, [language]);
@@ -732,10 +734,10 @@ function Picker({
       );
       const size = y + maxHeight + pickerHeight + bottomOffset;
 
-      const direction = size < WINDOW_HEIGHT ? 'top' : 'bottom';
+      const currentDirection = size < WINDOW_HEIGHT ? 'top' : 'bottom';
 
-      onDirectionChanged(direction);
-      setDirection(direction);
+      onDirectionChanged(currentDirection);
+      setDirection(currentDirection);
     }
 
     onPressToggle();
@@ -912,9 +914,10 @@ function Picker({
       // Add edge-to-edge support for Android
       Platform.OS === 'android' && {
         flex: 1,
-        backgroundColor: THEME.modalContentContainer.backgroundColor || '#FFFFFF',
+        backgroundColor:
+          THEME.modalContentContainer.backgroundColor || '#FFFFFF',
       },
-      ...[modalContentContainerStyle].flat()
+      ...[modalContentContainerStyle].flat(),
     ],
     [modalContentContainerStyle, THEME],
   );
@@ -1235,11 +1238,11 @@ function Picker({
    * @returns {JSX.Element}
    */
   const ExtendableBadgeContainer = useCallback(
-    ({ selectedItems }) => {
-      if (selectedItems.length > 0) {
+    ({ badgeContainerSelectedItems }) => {
+      if (badgeContainerSelectedItems.length > 0) {
         return (
           <View style={extendableBadgeContainerStyle}>
-            {selectedItems.map((item, index) => (
+            {badgeContainerSelectedItems.map((item, index) => (
               <View key={index} style={extendableBadgeItemContainerStyle}>
                 <__renderBadge item={item} index={index} />
               </View>
@@ -1263,7 +1266,9 @@ function Picker({
    */
   const BadgeBodyComponent = useMemo(() => {
     if (extendableBadgeContainer) {
-      return <ExtendableBadgeContainer selectedItems={selectedItems} />;
+      return (
+        <ExtendableBadgeContainer badgeContainerSelectedItems={selectedItems} />
+      );
     }
 
     return (
@@ -1677,9 +1682,9 @@ function Picker({
    * @param {string|number|boolean} value
    * @param {number} y
    */
-  const setItemPosition = useCallback((value, y) => {
+  const setItemPosition = useCallback((itemValue, y) => {
     if (autoScroll && listMode === LIST_MODE.SCROLLVIEW)
-      itemPositionsRef.current[value] = y;
+      itemPositionsRef.current[itemValue] = y;
   }, []);
 
   /**
@@ -1760,7 +1765,7 @@ function Picker({
   const _modalTitleStyle = useMemo(
     () => [
       THEME.modalTitle,
-       ...[textStyle].flat(),
+      ...[textStyle].flat(),
       ...[modalTitleStyle].flat(),
     ],
     [textStyle, modalTitleStyle, THEME],
@@ -1948,7 +1953,9 @@ function Picker({
         onRequestClose={onRequestCloseModal}
         {...modalProps}>
         {Platform.OS === 'android' ? (
-          <SafeAreaContextView style={_modalContentContainerStyle} edges={['top', 'bottom', 'left', 'right']}>
+          <SafeAreaContextView
+            style={_modalContentContainerStyle}
+            edges={['top', 'bottom', 'left', 'right']}>
             {SearchComponent}
             {DropDownFlatListComponent}
           </SafeAreaContextView>
@@ -1960,7 +1967,13 @@ function Picker({
         )}
       </Modal>
     ),
-    [open, SearchComponent, DropDownFlatListComponent, _modalContentContainerStyle, modalProps],
+    [
+      open,
+      SearchComponent,
+      DropDownFlatListComponent,
+      _modalContentContainerStyle,
+      modalProps,
+    ],
   );
 
   /**

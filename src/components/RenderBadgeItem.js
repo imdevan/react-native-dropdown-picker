@@ -1,5 +1,4 @@
 import React, { memo, useCallback, useMemo } from 'react';
-
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import { RTL_DIRECTION, RTL_STYLE } from '../constants';
