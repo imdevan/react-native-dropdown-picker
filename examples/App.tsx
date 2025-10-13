@@ -50,7 +50,6 @@ const EXAMPLES: Array<ExampleProps> = [
       style: {
         backgroundColor: '#fbf1c7',
         borderColor: '#b16286',
-        cursor: 'pointer',
       },
       customItemContainerStyle: {},
       listItemContainerStyle: {
