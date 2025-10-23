@@ -326,6 +326,12 @@ declare module 'react-native-dropdown-picker' {
   ) &
     DropDownPickerBaseProps<T>;
 
+    export type DropDownPickerIsSingleProps<T extends ValueType> =
+    DropDownPickerSingleProps<T> & DropDownPickerBaseProps<T>;
+
+    export type DropDownPickerIsMultipleProps<T extends ValueType> =
+    DropDownPickerMultipleProps<T> & DropDownPickerBaseProps<T>;
+
   const DropDownPicker: (<T extends ValueType>(
     props: PropsWithoutRef<DropDownPickerProps<T>>,
   ) => ReactElement) &
