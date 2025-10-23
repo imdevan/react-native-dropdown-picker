@@ -1,21 +1,32 @@
-import React, { JSX, useState } from 'react';
+import React, { JSX, useMemo, useState } from 'react';
 import { Button, StyleSheet, Text, useColorScheme, View } from 'react-native';
 import DropDownPicker, {
-  DropDownPickerMultipleProps,
-  DropDownPickerProps,
-  DropDownPickerSingleProps,
+  DropDownPickerIsMultipleProps,
+  DropDownPickerIsSingleProps,
   ItemType,
+  ValueType,
 } from 'react-native-dropdown-picker';
 
+// Omit these types from the example props
+type CommonOmitKeys = 'setValue' | 'value' | 'open' | 'items' | 'setOpen';
+
+type SingleDropdownProps<T extends ValueType> = Omit<
+  Partial<DropDownPickerIsSingleProps<T>>,
+  CommonOmitKeys
+>;
+
+type MultipleDropdownProps<T extends ValueType> = Omit<
+  Partial<DropDownPickerIsMultipleProps<T>>,
+  CommonOmitKeys
+>;
+
 export interface ExampleProps {
-  multiple?: boolean;
   title: string;
   description?: string;
   placeholder?: string;
   multipleText?: string;
-  // For the sake of keeping the examples simple for now
-  items?: Array<ItemType<string>>;
-  dropdownProps?: Partial<DropDownPickerProps<string>>;
+  items?: Array<ItemType<ValueType>>;
+  dropdownProps?: MultipleDropdownProps<ValueType> | SingleDropdownProps<ValueType>;
 }
 
 const DEFAULT_ITEMS = [
@@ -64,7 +75,6 @@ const styles = StyleSheet.create({
  * @param props.multiple
  */
 export default function DropDownPickerExample({
-  multiple = false,
   title,
   description,
   dropdownProps,
@@ -73,13 +83,51 @@ export default function DropDownPickerExample({
   items = DEFAULT_ITEMS,
 }: ExampleProps): JSX.Element {
   const [open, setOpen] = useState<boolean>(false);
-  const [singleValue, setSingleValue] = useState<string | null>(null);
-  const [multiValue, setMultiValue] = useState<Array<string> | null>(null);
+  const [singleValue, setSingleValue] = useState<ValueType | null>(null);
+  const [multiValue, setMultiValue] = useState<Array<ValueType> | null>(null);
   const colorScheme = useColorScheme();
   const color = colorScheme === 'dark' ? '#fff' : '#222';
   const theme = colorScheme === 'dark' ? 'DARK' : 'LIGHT';
 
-  const [_items, setItems] = useState<Array<ItemType<string>>>(items);
+  const [_items, setItems] = useState<Array<ItemType<ValueType>>>(items);
+  const isMultiple = dropdownProps?.multiple;
+
+  const RenderDropDown = () => {
+    if(isMultiple) {
+      const {..._dropdownProps} = dropdownProps;
+      delete _dropdownProps.multiple // remove multiple prop to hard set as true 
+      return (
+        <DropDownPicker<ValueType>
+          open={open}
+          value={multiValue}
+          items={_items}
+          setOpen={setOpen}
+          setValue={setMultiValue}
+          setItems={setItems}
+          theme={theme}
+          placeholder={placeholder}
+          multipleText={multipleText}
+          multiple
+          {..._dropdownProps as MultipleDropdownProps<ValueType>}
+        />
+      )
+    } else {
+      return (
+        <DropDownPicker<ValueType>
+          open={open}
+          value={singleValue}
+          items={_items}
+          setOpen={setOpen}
+          setValue={setSingleValue}
+          setItems={setItems}
+          theme={theme}
+          placeholder={placeholder}
+          multiple={false}
+          {...dropdownProps as SingleDropdownProps<ValueType>}
+        />
+      )
+    }
+  }
 
   return (
     // eslint-disable-next-line react-native/no-inline-styles
@@ -91,51 +139,18 @@ export default function DropDownPickerExample({
         )}
       </View>
 
-      {multiple ? (
-        <DropDownPicker<string>
-          open={open}
-          value={multiValue}
-          items={_items}
-          setOpen={setOpen}
-          setValue={setMultiValue}
-          setItems={setItems}
-          theme={theme}
-          placeholder={placeholder}
-          multipleText={multipleText}
-          multiple
-          {...(dropdownProps as Omit<
-            DropDownPickerMultipleProps<string>,
-            'setValue' | 'value' | 'multiple'
-          >)}
-        />
-      ) : (
-        <DropDownPicker<string>
-          open={open}
-          value={singleValue}
-          items={_items}
-          setOpen={setOpen}
-          setValue={setSingleValue}
-          setItems={setItems}
-          theme={theme}
-          placeholder={placeholder}
-          multiple={false}
-          {...(dropdownProps as Omit<
-            DropDownPickerSingleProps<string>,
-            'setValue' | 'value'
-          >)}
-        />
-      )}
+      {RenderDropDown()}
 
       <View style={{ ...styles.body }}>
         <Text style={{ ...styles.description, color }}>
-          {multiple ? 'Fruits currently are: ' : 'Fruit currently is: '}
-          {multiple ? JSON.stringify(multiValue) : JSON.stringify(singleValue)}
+          {isMultiple ? 'Fruits currently are: ' : 'Fruit currently is: '}
+          {isMultiple ? JSON.stringify(multiValue) : JSON.stringify(singleValue)}
         </Text>
 
         <Button
-          title={multiple ? 'Clear fruits' : 'Clear fruit'}
+          title={isMultiple ? 'Clear fruits' : 'Clear fruit'}
           onPress={(): void => {
-            if (multiple) setMultiValue(null);
+            if (isMultiple) setMultiValue(null);
             else setSingleValue(null);
           }}
         />

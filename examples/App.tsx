@@ -14,25 +14,23 @@ const EXAMPLES: Array<ExampleProps> = [
   {
     title: 'Multiple Select',
     description: 'Multiple select example',
-    multiple: true,
+    dropdownProps: { multiple: true },
   },
   {
     title: 'Multiple Select Badge Mode',
     description: 'Multiple select example - with badges',
-    multiple: true,
-    dropdownProps: { mode: 'BADGE', showBadgeDot: false },
+    dropdownProps: { multiple: true, mode: 'BADGE', showBadgeDot: false },
   },
   {
     title: 'Multiple Select Badge Mode with Dots',
     description: 'Multiple select example - with badges and dots',
-    multiple: true,
-    dropdownProps: { mode: 'BADGE', showBadgeDot: true },
+    dropdownProps: { multiple: true, mode: 'BADGE', showBadgeDot: true },
   },
   {
     title: 'Customized Multiple Select Badge Mode',
     description: 'Multiple select example - with badges',
-    multiple: true,
     dropdownProps: {
+      multiple: true,
       mode: 'BADGE',
       showBadgeDot: false,
       badgeDotStyle: {},
@@ -74,14 +72,14 @@ const EXAMPLES: Array<ExampleProps> = [
   {
     title: 'Multiple Search Example',
     description: 'This is the default dropdown picker - with search',
-    multiple: true,
-    dropdownProps: { searchable: true },
+    
+    dropdownProps: { multiple: true, searchable: true },
   },
   {
     title: 'Multiple Search Clear on Select Example',
     description: 'This is the default dropdown picker - with search',
-    multiple: true,
     dropdownProps: {
+      multiple: true,
       searchable: true,
       clearSearchFieldOnSelect: true,
       mode: 'BADGE',
@@ -90,8 +88,7 @@ const EXAMPLES: Array<ExampleProps> = [
   {
     title: 'Modal Example',
     description: 'This is the default dropdown picker - with search',
-    multiple: true,
-    dropdownProps: { listMode: 'MODAL' },
+    dropdownProps: { multiple: true, listMode: 'MODAL' },
   },
 ];
 
