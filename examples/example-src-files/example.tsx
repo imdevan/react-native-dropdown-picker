@@ -160,7 +160,7 @@ export default function DropDownPickerExample({
           <CodeSnippet
             code={`<DropDownPicker              
 ${dropdownProps ? 
-`  /* Custom properties */ \n` + Object.entries(dropdownProps || {})
+Object.entries(dropdownProps || {})
   .map(([key, value]) => {
     if (typeof value === 'string') {
       return `  ${key}='${value}'`;
@@ -174,10 +174,9 @@ ${dropdownProps ?
   setItems={setItems}
   theme={theme}
   placeholder={placeholder}
-${multiple ? 
+${isMultiple ? 
 `  setValue={setMultiValue}
-  value={multiValue}
-  multiple={true}` : 
+  value={multiValue}` : 
 `  setValue={setSingleValue}
   value={singleValue}`}
 />`}
