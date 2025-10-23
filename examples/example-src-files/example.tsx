@@ -1,7 +1,9 @@
 import React, { JSX, useState } from 'react';
 import { Button, StyleSheet, Text, useColorScheme, View } from 'react-native';
 import DropDownPicker, {
+  DropDownPickerMultipleProps,
   DropDownPickerProps,
+  DropDownPickerSingleProps,
   ItemType,
 } from 'react-native-dropdown-picker';
 
@@ -90,7 +92,7 @@ export default function DropDownPickerExample({
       </View>
 
       {multiple ? (
-        <DropDownPicker
+        <DropDownPicker<string>
           open={open}
           value={multiValue}
           items={_items}
@@ -101,10 +103,13 @@ export default function DropDownPickerExample({
           placeholder={placeholder}
           multipleText={multipleText}
           multiple
-          {...dropdownProps}
+          {...(dropdownProps as Omit<
+            DropDownPickerMultipleProps<string>,
+            'setValue' | 'value' | 'multiple'
+          >)}
         />
       ) : (
-        <DropDownPicker
+        <DropDownPicker<string>
           open={open}
           value={singleValue}
           items={_items}
@@ -114,7 +119,10 @@ export default function DropDownPickerExample({
           theme={theme}
           placeholder={placeholder}
           multiple={false}
-          {...dropdownProps}
+          {...(dropdownProps as Omit<
+            DropDownPickerSingleProps<string>,
+            'setValue' | 'value'
+          >)}
         />
       )}
 
