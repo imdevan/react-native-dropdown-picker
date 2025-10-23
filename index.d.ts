@@ -281,7 +281,7 @@ declare module 'react-native-dropdown-picker' {
     zIndex?: number;
   }
 
-  interface DropDownPickerSingleProps<T extends ValueType> {
+  export interface DropDownPickerSingleProps<T extends ValueType> {
     multiple?: false;
     onChangeValue?: (value: T | null) => void;
     onSelectItem?: (item: ItemType<T>) => void;
@@ -289,7 +289,7 @@ declare module 'react-native-dropdown-picker' {
     setValue: Dispatch<SetStateAction<T | null>>;
   }
 
-  interface DropDownPickerMultipleProps<T extends ValueType> {
+  export interface DropDownPickerMultipleProps<T extends ValueType> {
     multiple: true;
     onChangeValue?: (value: Array<T> | null) => void;
     onSelectItem?: (items: Array<ItemType<T>>) => void;
