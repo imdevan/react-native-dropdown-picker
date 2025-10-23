@@ -4,6 +4,7 @@ package-lock.json
 # don't lint build output
 build
 dist
+*.expo
 # don't lint coverage output
 coverage
 # don't lint workflows etc
