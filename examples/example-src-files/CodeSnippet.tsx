@@ -16,26 +16,6 @@ import Animated, {
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { ghcolors, tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-const styles = StyleSheet.create({
-  container: {
-    marginVertical: 10,
-    borderRadius: 5,
-    overflow: 'hidden',
-  },
-  header: {
-    padding: 10,
-  },
-  headerText: {
-    fontWeight: 'bold',
-  },
-  codeContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-  },
-});
-
 interface CodeSnippetProps {
   code: string;
 }
@@ -82,3 +62,23 @@ export default function CodeSnippet({ code }: CodeSnippetProps): JSX.Element {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginVertical: 10,
+    borderRadius: 5,
+    overflow: 'hidden',
+  },
+  header: {
+    padding: 10,
+  },
+  headerText: {
+    fontWeight: 'bold',
+  },
+  codeContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+  },
+});
