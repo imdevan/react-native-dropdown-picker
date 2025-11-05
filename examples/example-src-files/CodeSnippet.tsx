@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { JSX, useState } from 'react';
 import {
   LayoutChangeEvent,
   Pressable,
@@ -13,8 +13,10 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { ghcolors, tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
+// temporarily disabled react-native-syntax-highlighter as it is being buggy :(
+// todo: resolve issues with react-syntax-highlighter
+// import { ghcolors, tomorrow } from 'react-syntax-highlighter/styles/prism';
+// import SyntaxHighlighter from 'react-native-syntax-highlighter';
 
 interface CodeSnippetProps {
   code: string;
@@ -24,7 +26,7 @@ export default function CodeSnippet({ code }: CodeSnippetProps): JSX.Element {
   const colorScheme = useColorScheme();
   const backgroundColor = colorScheme === 'dark' ? '#333' : '#f5f5f5';
   const color = colorScheme === 'dark' ? '#fff' : '#222';
-  const syntaxStyle = colorScheme === 'dark' ? tomorrow : ghcolors;
+  // const syntaxStyle = colorScheme === 'dark' ? tomorrow : ghcolors;
 
   const [isExpanded, setIsExpanded] = useState(false);
   const height = useSharedValue(0);
@@ -54,9 +56,11 @@ export default function CodeSnippet({ code }: CodeSnippetProps): JSX.Element {
       </Pressable>
       <Animated.View style={animatedStyle}>
         <View onLayout={onLayout} style={styles.codeContainer}>
-          <SyntaxHighlighter language='jsx' style={syntaxStyle}>
+          <Text style={[{color}]}>
+          {/* <SyntaxHighlighter language='jsx' style={syntaxStyle}> */}
             {code}
-          </SyntaxHighlighter>
+          </Text>
+          {/* </SyntaxHighlighter> */}
         </View>
       </Animated.View>
     </View>
@@ -80,5 +84,6 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
+    padding: 16
   },
 });
